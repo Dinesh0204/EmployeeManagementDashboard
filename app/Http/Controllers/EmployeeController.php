@@ -53,7 +53,8 @@ class EmployeeController extends Controller
     public function filterEmployees(Request $request)
     {
         $this->filters = [
-            'department' => $request->department
+            'department' => $request->department,
+            'salary' => $request->salary
         ];
 
         $employees = $this->employeeRepsitory->getFilteredEmployees($this->filters);
