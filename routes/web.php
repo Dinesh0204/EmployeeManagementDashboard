@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::prefix('employee')->group(function () {
+        Route::get('/index', [EmployeeController::class, 'index'])->name('employee.index');
+        Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
+        Route::post('/create', [EmployeeController::class, 'store'])->name('employee.store');
+    });
+
+    Route::prefix('department')->group(function(){
+        Route::get('/index',[DepartmentController::class,'index'])->name('department.index');
+        Route::get('/create',[DepartmentController::class,'create'])->name('department.create');
+        Route::post('/create',[DepartmentController::class,'store'])->name('department.store');
+    });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
