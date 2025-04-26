@@ -4,7 +4,7 @@
 <div class="max-w-6xl mx-auto p-6">
     <div class="flex justify-between">
         <h1 class="text-3xl font-bold mb-6 text-center">Employees</h1>
-        <a href="{{route('employee.create')}}">Create</a>
+        <a class="block bg-green-900 text-white hover:bg-green-700 px-4 py-2 rounded-md" href="{{route('employee.create')}}">Create</a>
     </div>
 
     <div class="overflow-x-auto">

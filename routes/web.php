@@ -18,6 +18,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::prefix('employee')->group(function () {
+        Route::get('/index', [EmployeeController::class, 'index'])->name('employee.index');
+        Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
+        Route::post('/create', [EmployeeController::class, 'store'])->name('employee.store');
+    });
+    
     Route::prefix('department')->group(function(){
         Route::get('/index',[DepartmentController::class,'index'])->name('department.index');
         Route::get('/create',[DepartmentController::class,'create'])->name('department.create');
