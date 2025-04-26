@@ -11,13 +11,16 @@ use Illuminate\Http\Request;
 class DepartmentController extends Controller
 {
 
-    public function __construct(public DepartmentService $departmentService, public DepartmentRepository $departmentRepository) {}
+    public function __construct(
+        public DepartmentService $departmentService,
+        public DepartmentRepository $departmentRepository
+    ) {}
+
     public function index()
     {
         $departments = $this->departmentRepository->getAll();
         return view('department.index', ['departments' => $departments]);
     }
-
 
     public function create()
     {
