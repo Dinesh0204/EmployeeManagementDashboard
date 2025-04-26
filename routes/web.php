@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/index', [EmployeeController::class, 'index'])->name('employee.index');
         Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
         Route::post('/create', [EmployeeController::class, 'store'])->name('employee.store');
+        Route::post('/filter', [EmployeeController::class, 'filterEmployees'])->name('employee.filter');
     });
     
     Route::prefix('department')->group(function(){
