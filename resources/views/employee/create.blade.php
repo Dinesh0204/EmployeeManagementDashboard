@@ -44,6 +44,16 @@
                 @enderror
             </div>
 
+            <div class="mb-6">
+                <label for="salary" class="block text-gray-700 font-semibold mb-2">Salary</label>
+                <input type="text" name="salary" id="name"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 @error('name') border-red-500 @enderror">
+
+                @error('salary')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
             <div class="cursor-pointer flex justify-center bg-green-700 hover:bg-green-900 ">
                 <button type="submit"
                     class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-all duration-200">

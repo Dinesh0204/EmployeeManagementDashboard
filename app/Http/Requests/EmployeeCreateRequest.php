@@ -26,6 +26,7 @@ class EmployeeCreateRequest extends FormRequest
             'name' => 'required',
             'department_id' => 'required|exists:departments,id',
             'location_id' => 'required|exists:locations,id',
+            'salary' => 'required|numeric'
         ];
     }
 }
