@@ -66,6 +66,9 @@ class EmployeeController extends Controller
             ])->render()
         ], 200);
     }
+
+    public function getDataForGraph()
+    {
         return response()->json([
             'status' => true,
             'success' => $this->employeeRepsitory->getEmployeesCountWithDate()
