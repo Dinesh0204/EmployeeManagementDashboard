@@ -74,4 +74,12 @@ class EmployeeController extends Controller
             'success' => $this->employeeRepsitory->getEmployeesCountWithDate()
         ], 200);
     }
+
+    function getDataForMap()
+    {
+        return response()->json([
+            'status' => true,
+            'success' => $this->employeeRepsitory->getEmployeesLocation()
+        ]);
+    }
 }

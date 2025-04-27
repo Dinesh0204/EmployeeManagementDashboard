@@ -3,6 +3,7 @@
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,13 +24,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [EmployeeController::class, 'create'])->name('employee.create');
         Route::post('/create', [EmployeeController::class, 'store'])->name('employee.store');
         Route::post('/filter', [EmployeeController::class, 'filterEmployees'])->name('employee.filter');
-        Route::get('/employee/chart',[EmployeeController::class,'getDataForGraph'])->name('employee.chart');
+        Route::get('/employee/chart', [EmployeeController::class, 'getDataForGraph'])->name('employee.chart');
+        Route::get('/employee/map', [EmployeeController::class, 'getDataForMap'])->name('employee.map');
     });
-    
-    Route::prefix('department')->group(function(){
-        Route::get('/index',[DepartmentController::class,'index'])->name('department.index');
-        Route::get('/create',[DepartmentController::class,'create'])->name('department.create');
-        Route::post('/create',[DepartmentController::class,'store'])->name('department.store');
+
+    Route::prefix('department')->group(function () {
+        Route::get('/index', [DepartmentController::class, 'index'])->name('department.index');
+        Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');
+        Route::post('/create', [DepartmentController::class, 'store'])->name('department.store');
     });
 });
 
