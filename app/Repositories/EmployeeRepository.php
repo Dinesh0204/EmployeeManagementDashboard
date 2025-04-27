@@ -41,4 +41,17 @@ class EmployeeRepository
             'data' => $query->pluck('total')->toArray()
         ];
     }
+
+    public function getEmployeesLocation()
+    {
+        $employees = $this->getAll();
+        $result = $employees->map(function ($employee) {
+            return [
+                'name' => $employee->location->name,
+                'latitude' => $employee->location->latitude,
+                'longitude' => $employee->location->longitude
+            ];
+        })->unique();
+        return $result;
+    }
 }

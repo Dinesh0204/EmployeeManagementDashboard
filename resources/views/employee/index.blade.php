@@ -39,22 +39,32 @@
             @include('employee.ajax_listing')
             <div>
                 <div>
+                    <h1 class="py-6">Chart</h1>
                     <canvas id="myChart"></canvas>
                 </div>
             </div>
-        </div>
-        <div>
-            Chart
+
+
+            <div class="map-container">
+                <h1 class="py-6">Map</h1>
+                <p> The map below displays the locations of employees.</p>
+                <div id="employee-location-map" class="w-full h-[350px] border border-red-700">
+                </div>
+
+            </div>
         </div>
 
     </div>
 </div>
 @push('scripts')
 <script>
-    const ctx = document.getElementById('myChart');
+    const ctx = $('#myChart');
     let chart;
+    let map;
+
     $(document).ready(function() {
         loadChart();
+        loadMap();
     })
 
     $('#employee-filter').on('submit', function(e) {
@@ -114,6 +124,31 @@
                 chart = new Chart(ctx, config)
             }
         })
+    }
+
+    function loadMap() {
+        map = L.map('employee-location-map');
+
+        $.ajax({
+            type: 'GET',
+            url: "{{route('employee.map')}}",
+            success: function(data) {
+                console.log(data.success);
+                map.setView([19.0760, 72.8777], 5);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                data.success.forEach(function(location) {
+                    let lat = location.latitude;
+                    let lng = location.longitude;
+
+                    L.marker([lat, lng]).addTo(map)
+                        .bindPopup("<b>" + location.name + "</b>"); // Display location name in popup
+                });
+            }
+        });
     }
 </script>
 @endpush
