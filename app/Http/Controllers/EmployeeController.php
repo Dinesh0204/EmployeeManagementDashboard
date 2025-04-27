@@ -66,4 +66,9 @@ class EmployeeController extends Controller
             ])->render()
         ], 200);
     }
+        return response()->json([
+            'status' => true,
+            'success' => $this->employeeRepsitory->getEmployeesCountWithDate()
+        ], 200);
+    }
 }

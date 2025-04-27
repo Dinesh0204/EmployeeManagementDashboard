@@ -37,11 +37,26 @@
 
         <div class="flex-1 overflow-x-auto" id="employee_ajax_listing">
             @include('employee.ajax_listing')
+            <div>
+                <div>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
         </div>
+        <div>
+            Chart
+        </div>
+
     </div>
 </div>
 @push('scripts')
 <script>
+    const ctx = document.getElementById('myChart');
+    let chart;
+    $(document).ready(function() {
+        loadChart();
+    })
+
     $('#employee-filter').on('submit', function(e) {
         e.preventDefault();
         filter();
@@ -58,6 +73,46 @@
                 $('#employee_ajax_listing').html(data.success)
             },
             error: function(data) {}
+        })
+    }
+
+    function loadChart() {
+        $.ajax({
+            type: 'GET',
+            url: "{{route('employee.chart')}}",
+            success: function(data) {
+                xAxis = data.success.labels;
+                yAxis = data.success.data;
+                const config = {
+                    type: 'line',
+                    data: {
+                        labels: xAxis,
+                        datasets: [{
+                            label: 'Employees Count',
+                            data: yAxis,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Employee Count'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                }
+                            }
+                        }
+                    }
+                }
+                chart = new Chart(ctx, config)
+            }
         })
     }
 </script>
