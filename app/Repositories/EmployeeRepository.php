@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Employee;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeRepository
 {
@@ -24,5 +25,20 @@ class EmployeeRepository
         });
 
         return $query->get();
+    }
+
+
+    public function getEmployeesCountWithDate()
+    {
+        $query =  Employee::query();
+        $query->selectRaw('DATE(created_at) as date ,count(*) as total')
+            ->groupBy('date')
+            ->orderBy('date')
+            ->get();
+
+        return [
+            'labels' => $query->pluck('date')->toArray(),
+            'data' => $query->pluck('total')->toArray()
+        ];
     }
 }
