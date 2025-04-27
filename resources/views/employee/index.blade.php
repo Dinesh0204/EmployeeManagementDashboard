@@ -47,9 +47,8 @@
 
             <div class="map-container">
                 <h1 class="py-6">Map</h1>
-
+                <p> The map below displays the locations of employees.</p>
                 <div id="employee-location-map" class="w-full h-[350px] border border-red-700">
-
                 </div>
 
             </div>
