@@ -10,16 +10,26 @@
             <div class="mb-4">
                 <label for="name" class="block text-gray-700 font-semibold mb-2">Name</label>
                 <input type="text" name="name" id="name"
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 @error('name') border-red-500 @enderror">
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{old('name')}}" />
                 @error('name')
                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
             <div class="mb-4">
+                <label for="salary" class="block text-gray-700 font-semibold mb-2">Salary</label>
+                <input type="text" name="salary" id="salary"
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('salary') }}" />
+                @error('salary')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+
+
+            <div class="mb-4">
                 <label for="department" class="block text-gray-700 font-semibold mb-2">Department</label>
                 <select name="department_id" id="department"
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 @error('department_id') border-red-500 @enderror">
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">Select Department</option>
                     @foreach($departments as $department)
                     <option value="{{ $department->id }}">{{ $department->name }}</option>
@@ -33,7 +43,7 @@
             <div class="mb-6">
                 <label for="location" class="block text-gray-700 font-semibold mb-2">Location</label>
                 <select name="location_id" id="location"
-                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 @error('location_id') border-red-500 @enderror">
+                    class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">Select Location</option>
                     @foreach($locations as $location)
                     <option value="{{ $location->id }}">{{ $location->name }}</option>
