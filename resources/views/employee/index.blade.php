@@ -34,23 +34,26 @@
             </form>
         </div>
 
+        <div class="w-full">
+            <div id="employee_ajax_listing">
+                @include('employee.ajax_listing')
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="py-12 flex-1 overflow-x-auto pl-[240px]">
 
-        <div class="flex-1 overflow-x-auto" id="employee_ajax_listing">
-            @include('employee.ajax_listing')
-            <div>
-                <div>
-                    <h1 class="py-6">Chart</h1>
-                    <canvas id="myChart"></canvas>
+            <div class="bg-white rounded-lg shadow p-6 mb-10">
+                <h2 class="text-2xl font-bold mb-6">Chart</h2>
+                <div class="h-[400px]">
+                    <canvas id="myChart" class="w-full h-full"></canvas>
                 </div>
             </div>
 
-
-            <div class="map-container">
-                <h1 class="py-6">Map</h1>
-                <p> The map below displays the locations of employees.</p>
-                <div id="employee-location-map" class="w-full h-[350px] border border-red-700">
-                </div>
-
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-2xl font-bold mb-6">Map</h2>
+                <p class="text-gray-600 mb-6">The map below displays the locations of employees.</p>
+                <div id="employee-location-map" class="w-full h-[400px] rounded-md border border-gray-300"></div>
             </div>
         </div>
 
@@ -104,6 +107,8 @@
                         }]
                     },
                     options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
                         scales: {
                             y: {
                                 beginAtZero: true,
@@ -122,6 +127,8 @@
                     }
                 }
                 chart = new Chart(ctx, config)
+                chart.canvas.parentNode.style.height = '60vh';
+
             }
         })
     }
