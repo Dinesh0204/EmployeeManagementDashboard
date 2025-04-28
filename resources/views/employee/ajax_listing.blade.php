@@ -5,6 +5,7 @@
             <th class="py-3 px-6 text-left">Department</th>
             <th class="py-3 px-6 text-left">Salary</th>
             <th class="py-3 px-6 text-left">Location</th>
+            <th class="py-3 px-6 text-left">Created At</th>
         </tr>
     </thead>
 
@@ -15,6 +16,7 @@
             <td class="py-4 px-6">{{ $employee->department->name }}</td>
             <td class="py-4 px-6">{{ $employee->salary }}</td>
             <td class="py-4 px-6">{{ $employee->location->name }}</td>
+            <td class="py-4 px-6">{{ $employee->created_at }}</td>
         </tr>
         @endforeach
     </tbody>
