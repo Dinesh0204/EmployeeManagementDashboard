@@ -54,7 +54,8 @@ class EmployeeController extends Controller
     {
         $this->filters = [
             'department' => $request->department,
-            'salary' => $request->salary
+            'salary' => $request->salary,
+            'date' => $request->date
         ];
 
         $employees = $this->employeeRepsitory->getFilteredEmployees($this->filters);

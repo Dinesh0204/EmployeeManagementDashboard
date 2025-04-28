@@ -89,6 +89,28 @@
         })
     }
 
+    function filterBasedOnCustomData(date) {
+        let formData = $('#employee-filter').serializeArray(); // Get current form data
+        console.log(formData);
+        formData.push({
+            name: 'date',
+            value: date
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: "{{route('employee.filter')}}",
+            data: $.param(formData), // Convert array back into query string
+            dataType: "json",
+            success: function(data) {
+                $('#employee_ajax_listing').html(data.success);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+
     function loadChart() {
         $.ajax({
             type: 'GET',
@@ -108,6 +130,13 @@
                     },
                     options: {
                         responsive: true,
+                        onClick: function(event, activeElements) {
+                            if (activeElements.length > 0) {
+                                var firstElement = activeElements[0];
+                                var label = chart.data.labels[firstElement.index];
+                                filterBasedOnCustomData(label);
+                            }
+                        },
                         maintainAspectRatio: false,
                         scales: {
                             y: {

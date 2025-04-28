@@ -24,6 +24,10 @@ class EmployeeRepository
             $subQuery->where('salary', $filters['salary']);
         });
 
+        $query->when(!empty($filters['date']), function ($subQuery) use ($filters) {
+            return $subQuery->whereDate('created_at', $filters['date']);
+        });
+
         return $query->get();
     }
 
